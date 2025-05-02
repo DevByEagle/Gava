@@ -1,0 +1,8 @@
+import com.devbyeagle.gava.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Game game = new Game(800, 600, "Gava");
+        game.run();
+    }
+}

@@ -5,10 +5,6 @@ import javax.swing.*;
 public class Game implements Runnable {
     private final JFrame window;
 
-    public Game() {
-        this(800, 600, "Gava");
-    }
-
     public Game(int width, int height, String title) {
         window = new JFrame(title);
 
