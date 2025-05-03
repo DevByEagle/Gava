@@ -2,10 +2,10 @@ package com.devbyeagle.gava;
 
 import javax.swing.*;
 import java.awt.*;
-import com.devbyeagle.gava.math.Vector2;
 
 public class Game implements Runnable {
     private final JFrame window;
+    private long lastTime = System.nanoTime();
 
     public Game(int width, int height, String title) {
         window = new JFrame(title);
@@ -14,8 +14,11 @@ public class Game implements Runnable {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public boolean isKeyPressed(int key) {
-        return InputStream.KeyCode.fromKeyCode(key) != null;
+    public double getTime() {
+        long now = System.nanoTime();
+        double delta = (now - lastTime) / 1_000_000_000.0;
+        lastTime = now;
+        return delta;
     }
 
     @Override
