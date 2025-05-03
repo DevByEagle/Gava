@@ -1,10 +1,8 @@
 package com.devbyeagle.gava;
 
 import javax.swing.*;
-
-import com.devbyeagle.gava.math.Vector2;
-
 import java.awt.*;
+import com.devbyeagle.gava.math.Vector2;
 
 public class Game implements Runnable {
     private final JFrame window;
@@ -20,8 +18,8 @@ public class Game implements Runnable {
         drawText(text, posX, posY, new Font(window.getFont().getName(), Font.PLAIN, fontSize), color);
     }
 
-    public void drawText(String text, Vector2 position, int fontSize) {
-        drawText(text, (int) position.x, (int) position.y, fontSize, window.getGraphics().getColor());
+    public void drawText(Font font, String text, Vector2 position) {
+        drawText(text, (int) position.x, (int) position.x, font, window.getGraphics().getColor());
     }
 
     @Override
