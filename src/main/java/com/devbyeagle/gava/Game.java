@@ -14,12 +14,8 @@ public class Game implements Runnable {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void drawText(String text, int posX, int posY, int fontSize, Color color) {
-        drawText(text, posX, posY, new Font(window.getFont().getName(), Font.PLAIN, fontSize), color);
-    }
-
-    public void drawText(Font font, String text, Vector2 position) {
-        drawText(text, (int) position.x, (int) position.x, font, window.getGraphics().getColor());
+    public boolean isKeyPressed(int key) {
+        return InputStream.KeyCode.fromKeyCode(key) != null;
     }
 
     @Override
@@ -28,10 +24,4 @@ public class Game implements Runnable {
     }
 
     // Private functions
-    private void drawText(String text, int x, int y, Font font, Color color) {
-        Graphics g = window.getGraphics();
-        g.setFont(font);
-        g.setColor(color);
-        g.drawString(text, x, y);
-    }
 }
