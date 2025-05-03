@@ -1,6 +1,12 @@
 plugins {
-    java
+    id("java")
 }
 
-group = "com.devbyeagle.gava"
-version = "1.0.0"
+allprojects {
+    group = "com.devbyeagle.gava"
+    version = "1.0.0"
+
+    repositories {
+        mavenCentral()
+    }
+}
