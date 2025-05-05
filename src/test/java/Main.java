@@ -1,9 +1,9 @@
-import com.devbyeagle.gava.*;
+//import com.devbyeagle.gava.*;
+import com.devbyeagle.gava.math.Vector2;
 
 public class Main {
-    public static void main(String[] args) {
-        Game game = new Game(800, 600, "Gava");
-        game.run();
-        System.out.println(game.isKeyPressed(InputStream.KeyCode.A));
-    }
+	public static void main(String[] args) {
+		final Game game = new Game();
+		game.run();		
+	}
 }
