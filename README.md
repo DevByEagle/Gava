@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/GavaWhite.png">
     <source media="(prefers-color-scheme: light)" srcset="assets/GavaBlack.png">
-    <img alt="Gava" src="assets/SatchelBlack.png">
+    <img alt="Gava" src="assets/GavaBlack.png">
   </picture>
 </h1>
 
