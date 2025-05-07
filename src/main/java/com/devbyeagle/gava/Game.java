@@ -15,6 +15,15 @@ public class Game {
         window.setSize(width, height);
     }
 
+    /** 
+     * Draws a filled rectangle on the window immediately using the specified color.
+     * 
+     * @param posX the x-coordinate of the rectangle
+     * @param posY the y-coordinate of the rectangle
+     * @param width the width of this rectangle
+     * @param height the height of this rectangle
+     * @param color the fill color of the rectangle
+     */
     public final void drawRect(int posX, int posY, int width, int height, Color color) {
         SwingUtilities.invokeLater(() -> {
             Graphics g = window.getGraphics();
