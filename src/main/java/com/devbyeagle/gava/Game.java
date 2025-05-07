@@ -1,13 +1,13 @@
 package com.devbyeagle.gava;
 
 import javax.swing.*;
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 public class Game {
     private final JFrame window = new JFrame();
-
+    
     public Game() {
+        window.add(panel);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -24,6 +24,7 @@ public class Game {
      * @param height the height of this rectangle
      * @param color the fill color of the rectangle
      */
+    // TODO: Make rendering persistent using a buffered approach or proper painting.
     public final void drawRect(int posX, int posY, int width, int height, Color color) {
         SwingUtilities.invokeLater(() -> {
             Graphics g = window.getGraphics();
