@@ -10,7 +10,7 @@ plugins {
 }
 
 allprojects {
-	group = "com.devbyeagle.gava"
+	group = "org.gava"
 	version = "1.0.0"
 
 	repositories {
