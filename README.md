@@ -20,7 +20,7 @@ import com.devbyeagle.gava.Game;
 
 public class MyGame extends Game {
   public MyGame() {
-    super(); // You can also do super(width, height, String title);
+    super(); // You can also do super(width, height, title);
   }
 
   @Override
