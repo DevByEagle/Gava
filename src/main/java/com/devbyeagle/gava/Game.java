@@ -2,41 +2,88 @@ package com.devbyeagle.gava;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 
-public class Game {
-    private final JFrame window = new JFrame();
-    
+/** Abstract class representing the base structure of a 2D game. */
+public abstract class Game implements Runnable {
+    private JFrame frame;
+    private Thread gameThread;
+    private boolean running = false;
+    private int fps = 60;
+
+    /** Creates a game window with default dimensions and title. */
     public Game() {
-        window.add(panel);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this(800, 600, "Gava");
     }
 
-    public final void setResolution(int width, int height) {
-        window.setSize(width, height);
+    public Game(int width, int height, String title) {
+        frame = new JFrame(title);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(width, height);
+        frame.setVisible(true);
     }
 
-    /** 
-     * Draws a filled rectangle on the window immediately using the specified color.
-     * 
-     * @param posX the x-coordinate of the rectangle
-     * @param posY the y-coordinate of the rectangle
-     * @param width the width of this rectangle
-     * @param height the height of this rectangle
-     * @param color the fill color of the rectangle
-     */
-    // TODO: Make rendering persistent using a buffered approach or proper painting.
-    public final void drawRect(int posX, int posY, int width, int height, Color color) {
-        SwingUtilities.invokeLater(() -> {
-            Graphics g = window.getGraphics();
-            if (g != null) {
-                g.setColor(color);
-                g.fillRect(posX, posY, width, height);
-                g.dispose();
-            }
-        });
+    private synchronized void start() {
+        if (running)
+            return;
+        running = true;
+        gameThread = new Thread(this);
+        gameThread.start();
     }
 
+    private synchronized void stop() {
+        if (!running)
+            return;
+        running = false;
+        try {
+            gameThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /** The main game loop. Handles updating and rendering. */
     public final void run() {
-        window.setVisible(true);
+        start();
+        long lastTime = System.nanoTime();
+        double nsPerUpdate = 1000000000.0 / fps;
+        double delta = 0;
+
+        while (running) {
+            long now = System.nanoTime();
+            delta += (now - lastTime) / nsPerUpdate;
+            lastTime = now;
+
+            while (delta >= 1) {
+                update();
+                delta--;
+            }
+
+            render();
+        }
+        stop();
     }
+
+    private void render() {
+        BufferStrategy bs = frame.getBufferStrategy();
+        if (bs == null) {
+            frame.createBufferStrategy(3);
+            return;
+        }
+
+        Graphics g = bs.getDrawGraphics();
+        draw(g);
+        g.dispose();
+        bs.show();
+    }
+
+    /** Called once every frame to update the game logic. */
+    protected abstract void update();
+
+    /**
+     * Called once every frame to render graphics.
+     *
+     * @param g Graphics context
+     */
+    protected abstract void draw(Graphics g);
 }
