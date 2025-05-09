@@ -1,7 +1,5 @@
 package com.devbyeagle.gava;
 
-import java.awt.event.KeyEvent;
-
 /**
  * Provides a foundational interface for handling user input, currently supporting keyboard and mouse interactions.
  * 
