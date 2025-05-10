@@ -1,6 +1,13 @@
 package org.gava;
 
 import java.awt.event.KeyListener;
+
+/**
+ * Handles low-level user input events such as keyboard and mouse interactions.
+ * <ul></ul>
+ * <p><strong>Note:</strong> {@link Input.Keys} currently does not contain all possible key definitions.
+ * For unsupported key codes, refer to the {@link java.awt.event.KeyEvent} constants.</p>
+ */
 public interface Input extends KeyListener {
     public static class Keys {
         public static final int NUM_0 = 0x30;
@@ -107,9 +114,221 @@ public interface Input extends KeyListener {
 		public static final int F22 = 0xF009;
 		public static final int F23 = 0xF00A;
 		public static final int F24 = 0xF00B;
-    
-        
+
+        /** Converts the keycode to a readable string format. */
+        public static String toString(int keycode) {
+            if (keycode < 0) throw new IllegalArgumentException("keycode cannot be negative, keycode: " + keycode);
+            switch (keycode) {
+            case UNKNOWN:
+                return "Unknown";
+            case NUM_0:
+                return "0";
+            case NUM_1:
+                return "1";
+            case NUM_2:
+                return "2";
+            case NUM_3:
+                return "3";
+            case NUM_4:
+                return "4";
+            case NUM_5:
+                return "5";
+            case NUM_6:
+                return "6";
+            case NUM_7:
+                return "7";
+            case NUM_8:
+                return "8";
+            case NUM_9:
+                return "9";
+            case UP:
+                return "Up";
+            case DOWN:
+                return "Down";
+            case LEFT:
+                return "Left";
+            case RIGHT:
+                return "Right";
+            case A:
+				return "A";
+			case B:
+				return "B";
+			case C:
+				return "C";
+			case D:
+				return "D";
+			case E:
+				return "E";
+			case F:
+				return "F";
+			case G:
+				return "G";
+			case H:
+				return "H";
+			case I:
+				return "I";
+			case J:
+				return "J";
+			case K:
+				return "K";
+			case L:
+				return "L";
+			case M:
+				return "M";
+			case N:
+				return "N";
+			case O:
+				return "O";
+			case P:
+				return "P";
+			case Q:
+				return "Q";
+			case R:
+				return "R";
+			case S:
+				return "S";
+			case T:
+				return "T";
+			case U:
+				return "U";
+			case V:
+				return "V";
+			case W:
+				return "W";
+			case X:
+				return "X";
+			case Y:
+				return "Y";
+			case Z:
+				return "Z";
+            case COMMA:
+				return ",";
+			case PERIOD:
+				return ".";
+            case ALT:
+                return "ALT";
+            case SHIFT:
+                return "Shift";
+            case TAB:
+				return "Tab";
+			case SPACE:
+				return "Space";
+            case ENTER:
+				return "Enter";
+			case DEL:
+				return "Delete"; // also BACKSPACE
+            case MINUS:
+				return "-";
+			case EQUALS:
+				return "=";
+            case BACKSLASH:
+				return "\\";
+			case SEMICOLON:
+				return ";";
+            case SLASH:
+				return "/";
+            case ESCAPE:
+				return "Escape";
+            case INSERT:
+				return "Insert";
+			case NUMPAD_0:
+				return "Numpad 0";
+			case NUMPAD_1:
+				return "Numpad 1";
+			case NUMPAD_2:
+				return "Numpad 2";
+			case NUMPAD_3:
+				return "Numpad 3";
+			case NUMPAD_4:
+				return "Numpad 4";
+			case NUMPAD_5:
+				return "Numpad 5";
+			case NUMPAD_6:
+				return "Numpad 6";
+			case NUMPAD_7:
+				return "Numpad 7";
+			case NUMPAD_8:
+				return "Numpad 8";
+			case NUMPAD_9:
+				return "Numpad 9";
+			case COLON:
+				return ":";
+			case F1:
+				return "F1";
+			case F2:
+				return "F2";
+			case F3:
+				return "F3";
+			case F4:
+				return "F4";
+			case F5:
+				return "F5";
+			case F6:
+				return "F6";
+			case F7:
+				return "F7";
+			case F8:
+				return "F8";
+			case F9:
+				return "F9";
+			case F10:
+				return "F10";
+			case F11:
+				return "F11";
+			case F12:
+				return "F12";
+			case F13:
+				return "F13";
+			case F14:
+				return "F14";
+			case F15:
+				return "F15";
+			case F16:
+				return "F16";
+			case F17:
+				return "F17";
+			case F18:
+				return "F18";
+			case F19:
+				return "F19";
+			case F20:
+				return "F20";
+			case F21:
+				return "F21";
+			case F22:
+				return "F22";
+			case F23:
+				return "F23";
+			case F24:
+				return "F24";
+            case NUM_LOCK:
+				return "Num Lock";
+			case CAPS_LOCK:
+				return "Caps Lock";
+            default:
+                // key name not found
+                return null;
+            }
+        }
     }
 
+    /**
+     * Determines if a specific key is currently being held down by the user.
+     * <ul></ul>
+     * This method checks the real-time state of the keyboard input system to verify whether
+     * the specified key is actively pressed. The key should correspond to a constant defined
+     * in {@link Input.Keys}, which represents standard keyboard key codes.
+     * 
+     * @param key The integer key code as defined in {@link java.awt.event.KeyEvent} or {@link Input.Keys}.
+     * @return {@code true} if the key is actively pressed; {@code false} otherwise.
+     */
     public boolean isKeyPressed(int key);
+
+    /**
+     * Checks if the specified key is currently being held down.
+     * 
+     * @param key The key to check, using {@link java.awt.event.KeyEvent} or {@link Input.Keys} constants.
+     * @return {@code true} if the key being held down; {@code false} otherwise.
+     */
+    public boolean isKeyDown(int key);
 }
