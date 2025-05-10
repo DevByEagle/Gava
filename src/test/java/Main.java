@@ -1,23 +1,16 @@
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 
-import org.gava.*;
+import org.gava.Game;
 
 public class Main extends Game {
-    public Main() {
-        super();
-    }
-
     @Override
-    protected void update() {
-        if (InputProcessor.getInstance().isKeyDown(Input.Keys.W)) {
-            System.out.println("W was Pressed");
-        }
-    }
-
-    @Override
-    protected void draw(Graphics g) {
+    public void draw(Graphics g) {
         g.fillRect(100, 100, 100, 100);
+    }
+
+    @Override
+    public void update() {
+        System.out.println("Hello, World!");
     }
 
     public static void main(String[] args) {

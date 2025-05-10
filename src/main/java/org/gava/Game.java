@@ -1,88 +1,71 @@
 package org.gava;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-public abstract class Game implements Runnable {
-	private JFrame frame;
-	private Thread gameThread;
-	private boolean running = false;
-	private int fps = 60;
-	
-	/** Creates a game window with default dimensions and title. */
-	public Game() {
-		this(800, 600, "Gava");
-	}
-	
-	public Game(int width, int height, String title) {
-		frame = new JFrame(title);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(width, height);
-		frame.setVisible(true);
-		
-		frame.addKeyListener(InputProcessor.getInstance());
-	}
-	
-	/** The main loop. Handles updating and rendering. */
-	public final void run() {
-		start();
-		final double nsPerUpdate = 1000000000.0 / fps;
-		long lastTime = System.nanoTime();
-		double delta = 0;
-		
-		while (running) {
-			long now = System.nanoTime();
-			delta += (now - lastTime) / nsPerUpdate;
-			lastTime = now;
-			
-			while (delta >= 1) {
-				update();
-				delta--;
-			}
-			
-			render();
-		}
-		stop();
-	}
-	
-	private void render() {
-		BufferStrategy bs = frame.getBufferStrategy();
-		if (bs == null) {
-			frame.createBufferStrategy(3);
-			return;
-		}
-		
-		Graphics g = bs.getDrawGraphics();
-		draw(g);
-		g.dispose();
-		bs.show();
-	}
-	
-	/** Called once every frame to update the game logic. */
-	protected abstract void update();
-	
-	/**
-	 * Called once every frame to render graphics.
-	 * 
-	 * @param g Graphics context
-	 */
-	protected abstract void draw(Graphics g);
-	
-	private synchronized void start() {
-		if (running) return;
-		running = true;
-		gameThread = new Thread(this);
-		gameThread.start();
-	}
-	
-	private synchronized void stop() {
-		if (!running) return;
-		running = false;
-		try {
-			gameThread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+import javax.swing.JFrame;
+
+public abstract class Game implements Graphics {
+	private final JFrame frame;
+    private final GameTime gameTime = new GameTime();
+    private boolean running = false;
+    
+    public Game() {
+    	frame = new JFrame();
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame.setVisible(true);
+    }
+    
+    @Override
+    public final float getRawDeltaTime() {
+    	return gameTime.deltaTime;
+    }
+    
+    /** The main loop. Handles updating and rendering. */
+    public final void run() {
+    	start();
+    	float delta = 0;
+    	
+    	while (running) {
+    		gameTime.updateTime();
+    		delta += getRawDeltaTime();
+    		
+    		while (delta >= 1) {
+    			update();
+    			delta--;
+    		}
+    		
+    		render();
+    	}
+    	dispose();
+    }
+    
+    private void render() {
+    	BufferStrategy bs = frame.getBufferStrategy();
+    	if (bs == null) {
+    		frame.createBufferStrategy(3);
+    		return;
+    	}
+    	
+    	java.awt.Graphics g = bs.getDrawGraphics();
+    	draw(g);
+    	g.dispose();
+    	bs.show();
+    }
+    
+    /** Called once every frame to update the game logic. */
+    public abstract void update();
+    
+    /** Called once every frame to render graphics.
+     * @param g Graphics context */
+    public abstract void draw(java.awt.Graphics g);
+    
+    public void dispose() {
+    	if (!running) return;
+    	running = false;
+    }
+    
+    public void start() {
+    	if (running) return;
+    	running = true;
+    }
 }
