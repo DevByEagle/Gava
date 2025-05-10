@@ -16,27 +16,21 @@ Gava is a lightweight, flexible, and easy-to-use gaming library for Java. Design
 ```java
 import java.awt.Graphics;
 
-import org.gava.*;
+import org.gava.Game;
 
 public class MyGame extends Game {
-  public MyGame() {
-    super();
-  }
-
+  // This is to update the games logics.
   @Override
-  protected void draw(Graphics g) {
-    g.fillRect(100, 100, 100, 100);
-  }
+  public void update() {}
 
+  // This is to draw graphics to the screen.
   @Override
-  protected void update() {
-    if (InputProcessor.getInstance().isKeyDown(Input.Keys.W)) {
-      System.out.println("W was Pressed!");
-    }
+  public void draw(Graphics g) {
+    g.fillRound(100, 100, 100, 100);
   }
 
   public static void main(String[] args) {
-    new Main().run();
+    new MyGame().run();
   }
 }
 ```
