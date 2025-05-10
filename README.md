@@ -19,11 +19,9 @@ import java.awt.Graphics;
 import org.gava.Game;
 
 public class MyGame extends Game {
-  // This is to update the games logics.
   @Override
   public void update() {}
 
-  // This is to draw graphics to the screen.
   @Override
   public void draw(Graphics g) {
     g.fillRound(100, 100, 100, 100);
