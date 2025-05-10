@@ -23,6 +23,11 @@ public class InputProcessor implements Input {
 	}
 
 	@Override
+	public boolean isKeyDown(int key) {
+		return keys[key];
+	}
+
+	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() < keys.length)
 			keys[e.getKeyCode()] = true;

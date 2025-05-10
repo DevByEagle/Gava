@@ -10,8 +10,8 @@ public class Main extends Game {
 
     @Override
     protected void update() {
-        if (InputProcessor.getInstance().isKeyPressed(Input.Keys.W)) {
-            System.out.println("W key preesed!");
+        if (InputProcessor.getInstance().isKeyDown(Input.Keys.W)) {
+            System.out.println("W was Pressed");
         }
     }
 
