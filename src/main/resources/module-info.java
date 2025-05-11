@@ -1,3 +1,6 @@
 module org.gava {
-	requires java.desktop;
+	requires transitive java.desktop;
+
+	exports org.gava;
+	exports org.gava.math;
 }
