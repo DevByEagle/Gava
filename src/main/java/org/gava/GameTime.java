@@ -4,7 +4,7 @@ public class GameTime {
 	protected float deltaTime = 0;
 	private long frameStart = 0;
 	private int frames = 0;
-	protected int fps;
+	private int fps;
 	private long lastTime = System.nanoTime();
 	
 	protected void updateTime() {
