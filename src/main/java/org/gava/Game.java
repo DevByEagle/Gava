@@ -16,6 +16,7 @@ public abstract class Game implements Disposable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 600);
 		frame.setVisible(true);
+		frame.addKeyListener(InputProcessor.getInstance());
 	}
 	
 	public void dispose() {
@@ -38,6 +39,7 @@ public abstract class Game implements Disposable {
             
             if (delta >= 1) {
             	update();
+            	InputProcessor.getInstance().update();
             	delta--;
             }
             

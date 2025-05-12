@@ -3,4 +3,5 @@ module org.gava {
 
 	exports org.gava;
 	exports org.gava.math;
+	exports org.gava.graphics;
 }
