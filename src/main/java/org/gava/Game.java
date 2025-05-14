@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 import org.gava.utils.Disposable;
 
-public abstract class Game implements Disposable {
+public abstract class Game implements Disposable{
 	private final JFrame frame;
 	private boolean running = false;
 	private int fps = 60;
@@ -16,12 +16,13 @@ public abstract class Game implements Disposable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 600);
 		frame.setVisible(true);
-		frame.addKeyListener(InputProcessor.getInstance());
+		//frame.addKeyListener(InputProcessor.getInstance());
 	}
 	
+	@Override
 	public void dispose() {
 		if (!running) return;
-		running = true;
+		running = false;
 	}
 	
 	/** The main loop. Handles updating and rendering. */
@@ -30,22 +31,21 @@ public abstract class Game implements Disposable {
 		
 		final double drawInterval = 1000000000 / fps;
 		double delta = 0;
-        long lastTime = System.nanoTime();
-        
-        while (running) {
-        	long currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / drawInterval;
-            lastTime = currentTime;
-            
-            if (delta >= 1) {
-            	update();
-            	InputProcessor.getInstance().update();
-            	delta--;
-            }
-            
-            render();
-        }
-        dispose();
+		long lastTime = System.nanoTime();
+		
+		while (running) {
+			long currentTime = System.nanoTime();
+			delta += (currentTime - lastTime) / drawInterval;
+			lastTime = currentTime;
+			
+			if (delta >= 1) {
+				update();
+				delta--;
+			}
+			
+			render();
+		}
+		dispose();
 	}
 	
 	private void start() {
@@ -55,7 +55,7 @@ public abstract class Game implements Disposable {
 	
 	private void render() {
 		if (frame.getBufferStrategy() == null) {
-			frame.createBufferStrategy(3);
+			frame.createBufferStrategy(2);
 			return;
 		}
 		
@@ -65,8 +65,13 @@ public abstract class Game implements Disposable {
 		frame.getBufferStrategy().show();
 	}
 	
-	public abstract void draw(Graphics g);
-	
 	/** Called once every frame to update the game logic. */
 	public abstract void update();
+	
+	/**
+	 * Called once every frame to render graphics.
+	 * 
+	 * @param g Graphics context
+	 */
+	public abstract void draw(Graphics g);
 }
