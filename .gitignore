@@ -1,5 +1,13 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+# Ignore auto-generated files
+# ...
 
-# Ignore Gradle build output directory
-build
+# Byte-compiled files
+*.class
+
+# Distribution / Packaging
+*.jar
+
+# Gradle files
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
