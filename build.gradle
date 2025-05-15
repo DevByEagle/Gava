@@ -1,7 +1,3 @@
-plugins {
-	id 'java'
-}
-
 allprojects {
 	group = "org.gava"
 	version = "1.0.0"
@@ -9,8 +5,4 @@ allprojects {
 	tasks.withType(Javadoc) {
 		options.addStringOption('Xdoclint:none', '-quiet')
 	}
-}
-
-java {
-  withJavadocJar()
 }
