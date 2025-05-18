@@ -1,4 +1,8 @@
 allprojects {
 	group = "org.gava"
 	version = "1.0.0"
+	
+	tasks.withType(Javadoc) {
+		options.addStringOption('Xdoclint:none', '-quiet')
+	}
 }

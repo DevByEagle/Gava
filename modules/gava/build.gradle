@@ -1,4 +1,4 @@
-apply plugin: "java"
+apply plugin: 'java'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -6,8 +6,11 @@ java {
     withJavadocJar()
 }
 
+sourceSets.main.java.srcDirs = ["src"]
+sourceSets.main.resources.srcDirs = ["res"]
+
 tasks.jar {
-    archiveBaseName.set("Gava")
+    archiveBaseName.set('Gava')
     archiveVersion.set(version)
     archiveClassifier.set("") // no classifier, so jar will be Gava-1.0.0.jar
 }
