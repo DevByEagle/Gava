@@ -19,13 +19,19 @@ import java.awt.Graphics;
 import org.gava.Game;
 
 public class MyGame extends Game {
-  @Override
-  public void update() {}
+  final Sprite player;
+
+  public MyGame() {
+   player = new Sprite(new Texture("/icon.ico")); // Put your Texture for your Sprite here.
+  }
 
   @Override
   public void draw(Graphics g) {
-    g.fillRound(100, 100, 100, 100);
+    player.draw(g);
   }
+
+  @Override
+  public void update() {}
 
   public static void main(String[] args) {
     new MyGame().run();
