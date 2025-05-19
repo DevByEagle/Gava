@@ -7,7 +7,7 @@ import org.gava.math.Vector2;
 public class Sprite {
     private Texture texture;
 
-    public math.Vector2 position = Vector2.Zero;
+    public Vector2 position = Vector2.Zero;
 
     public Sprite() {
         this.texture = null;
